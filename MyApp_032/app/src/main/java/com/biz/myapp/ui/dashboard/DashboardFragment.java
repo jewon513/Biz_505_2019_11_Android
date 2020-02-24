@@ -1,0 +1,61 @@
+package com.biz.myapp.ui.dashboard;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.text.AlteredCharSequence;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.biz.myapp.R;
+
+public class DashboardFragment extends Fragment implements View.OnClickListener{
+
+    private DashboardViewModel dashboardViewModel;
+
+    ImageView imgView;
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        dashboardViewModel =
+                ViewModelProviders.of(this).get(DashboardViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        imgView = root.findViewById(R.id.image_1);
+        imgView.setOnClickListener(this);
+
+        return root;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        /*
+            SnackBar, Toast와 달리 popup alert을 띄우고 사용자의 요청을 기다리는 클랫
+
+         */
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext()).setTitle("종료").setMessage("app을 종료할까요").setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).setNegativeButton("아니오", null);
+
+        AlertDialog dialog = alert.create();
+        dialog.show();
+
+
+
+    }
+}
